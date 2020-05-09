@@ -1,0 +1,25 @@
+def largestRectangle(h):
+    maxarea=0
+    for i in range(len(h)):
+        j=k=i
+        while(j>=0):
+            if(h[j]<h[i]):
+                break;
+            j-=1;
+        while(k<len(h)):
+            if(h[k]<h[i]):
+                break;
+            k+=1
+        length = k-j-1;
+        area = length*h[i];
+        if(area>maxarea):
+            maxarea = area
+    return maxarea;
+
+
+n = int(input())
+
+h = list(map(int, input().rstrip().split()))
+
+result = largestRectangle(h)
+print(result)
