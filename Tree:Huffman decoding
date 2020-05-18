@@ -1,0 +1,14 @@
+def decodeHuff(root, s):
+    result =[]
+    curr = root
+    for i in s:
+        c = int(i)
+        if c==1:
+            curr = curr.right
+        if c==0:
+            curr = curr.left
+        if(curr.right==None and curr.left==None):
+            result.append(curr.data)
+            curr = root
+    result=''.join(result)
+    print(result)
