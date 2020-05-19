@@ -1,0 +1,34 @@
+def create(s,n):
+    k =[]
+    
+    for i in range(26):
+        k.append([0]*(n+1))
+    #print(k)
+    for i in range(n):
+        for j in range(26):
+            try:
+                k[j][i+1]=k[j][i]
+                if(ord(s[i])-97==j):
+                    k[j][i+1]+=1
+            except:
+                print(i,j)
+    return k
+
+n = int(input().strip())
+s = input()
+
+q = int(input().strip())
+s = s.lower()
+k =  create(s,n)
+for _ in range(q):
+    l,r = map(int, input().rstrip().split())
+    r+=1
+    ans=0
+    for j in range(26,0,-1):
+        kt = k[j-1][r]-k[j-1][l]
+        if kt:
+            ans = kt
+            break;
+    print(ans)     
+
+    
