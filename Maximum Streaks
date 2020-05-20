@@ -1,0 +1,43 @@
+#!/bin/python3
+
+import os
+
+def getMaxStreaks(toss):
+    countHead=0
+    countTail=0
+    maxxhead =countHead
+    maxxTail = countTail
+    for i in range(len(toss)):
+        if toss[i]=='Heads':
+            countTail=0
+            countHead+=1
+            if(countHead>maxxhead):
+                maxxhead=countHead
+            
+        if (toss[i]=='Tails'):
+            countHead=0
+            countTail+=1
+            if(countTail>maxxTail):
+                maxxTail=countTail
+                
+    return maxxhead,maxxTail
+            
+    
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    toss_count = int(input().strip())
+
+    toss = []
+
+    for _ in range(toss_count):
+        toss_item = input()
+        toss.append(toss_item)
+
+    ans = getMaxStreaks(toss)
+
+    fptr.write(' '.join(map(str, ans)))
+    fptr.write('\n')
+
+    fptr.close()
