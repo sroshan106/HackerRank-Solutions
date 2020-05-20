@@ -1,0 +1,16 @@
+
+def getStrength(password, weight_a):
+    summ=0
+    for i in password:
+        weight = ord(i)-ord('a')+weight_a
+        weight=weight%26
+        summ+=weight
+    return summ
+
+password = input()
+
+weight_a = int(input().strip())
+
+strength = getStrength(password, weight_a)
+
+print(strength)
