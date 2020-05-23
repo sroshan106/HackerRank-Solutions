@@ -1,0 +1,36 @@
+
+def nonDivisibleSubset(k, s):
+    l={}
+    for i in range(k):
+        l[i]=0
+    for i in s:
+        temp = i%k
+        l[temp]+=1
+
+    summ=0
+    i
+    for i in range(1,k//2+1):
+        temp=l[i]
+        temp1=l[k-i]
+        if temp1>temp:
+            summ+=temp1
+        else:
+            summ+=temp
+    if l[0]!=0:
+        summ+=1
+    
+    if k%2==0:
+        summ -=l[k//2]
+        summ+=1
+    return summ
+first_multiple_input = raw_input().rstrip().split()
+
+n = int(first_multiple_input[0])
+
+k = int(first_multiple_input[1])
+
+s = map(int, raw_input().rstrip().split())
+
+result = nonDivisibleSubset(k, s)
+
+print(result)
