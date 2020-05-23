@@ -1,0 +1,35 @@
+
+
+def climbingLeaderboard(score, alice):
+    pos=0
+    temp=0
+    l=[]
+    for i in scores:
+        if temp!=i:
+            pos+=1
+        temp=i
+        l.append(pos)
+
+    for i in alice:
+        if i>=score[0]:
+            print(1)
+        else:
+            for k in range(1,len(score)):
+                if i>=score[k]:
+                    print(l[k])
+                    break;
+        if i<score[len(score)-1]:
+            print(l[k]+1)
+
+
+
+scores_count = int(input())
+
+scores = list(map(int, input().rstrip().split()))
+
+alice_count = int(input())
+
+alice = list(map(int, input().rstrip().split()))
+
+climbingLeaderboard(scores, alice)
+
