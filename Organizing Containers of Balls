@@ -1,0 +1,39 @@
+
+def organizingContainers(container):
+    n = len(container)
+    c=[]
+    d=[]
+    #Finding size of all the containers and storing it in list C
+    for i in range(n):
+        temp = 0
+        for k in range(n):
+            temp+=container[i][k]
+        c.append(temp)
+        
+    #Finding no of all the types  of balls and storing it in List D
+    for i in range(n):
+        temp =0
+        for k in range(n):
+            temp+=container[k][i]
+        d.append(temp)
+    c.sort()
+    d.sort()
+    for i in range(len(c)):
+        if c!=d:
+            return "Impossible"
+    return "Possible"
+
+
+
+q = int(input())
+for q_itr in range(q):
+    n = int(input())
+
+    container = []
+
+    for _ in range(n):
+        container.append(list(map(int, input().rstrip().split())))
+
+    result = organizingContainers(container)
+
+    print(result)
