@@ -1,0 +1,49 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the timeInWords function below.
+def timeInWords(h, m):
+    t={1:'one',2:'two',3:'three',4:'four', 5:'five',6:'six',7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen',14:'fourteen',16:'sixteen',17:'seventeen',18:'eighteen',19:'nineteen',20:'twenty'}
+    if m==0:
+        print(t[h],"o' clock")
+    elif m<30:
+        if m==1:
+            print("one minute past",t[h])
+        elif m<20:
+            if m!=15:
+                print(t[m],"minutes past",t[h])
+            else:
+                print("quarter past",t[h])
+        else:
+            c = m%10
+            m=m-m%10
+            print(t[m],t[c],"minutes past",t[h])
+    elif m>30:
+        m = 60-m
+        if m==1:
+            print("one minute to",t[h+1])
+        elif m<20:
+            if m!=15:
+                print(t[m],"minutes to",t[h+1])
+            else:
+                print("quarter to",t[h+1])
+        else:
+            c = m%10
+            m=m-m%10
+        
+            print(t[m],t[c],"minutes to",t[h+1])
+    else:
+        print("half past",t[h])
+
+
+
+h = int(input())
+
+m = int(input())
+
+result = timeInWords(h, m)
