@@ -1,0 +1,40 @@
+
+def biggerIsGreater(w):
+    p=w
+    E=0
+    l = len(w)
+    w = list(w)
+    i=0
+    flag=1
+    for i in range(l-1,0,-1):
+        if w[i-1]<w[i]:
+            flag=0
+            minn = 26
+            for j in range(i,l):
+                t=ord(w[j])-ord(w[i-1])
+                if minn>t and t>0:
+                    minn = t
+                    E=j
+            swap = w[E]
+            w[E]=w[i-1]
+            w[i-1]=swap
+            break;
+
+    sorty = w[i:]
+    w = w[:i]
+    sorty = sorted(sorty)
+    w +=sorty
+    w =''.join(w)
+    if flag==1:
+        return "no answer"
+    return w
+
+
+T = int(input())
+
+for T_itr in range(T):
+    w = input()
+
+    result = biggerIsGreater(w)
+
+    print(result)
