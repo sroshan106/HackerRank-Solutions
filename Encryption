@@ -1,0 +1,45 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the encryption function below.
+def encryption(s):
+    s=s.replace(' ','')
+    s = list(s)
+    l = len(s)
+    k = math.sqrt(l)
+    a = int(k)
+    b= a
+    while a*b<l:
+        if (a<b):
+            a=a+1
+        else:
+            b+=1
+    mat=[]
+    for i in range(a):
+        temp =s[:b]
+        s = s[b:]
+        q = b - len(temp)
+        for _ in range(q):
+            temp+=' '
+        mat.append(temp)
+
+    t ='' 
+    for i in range(b):
+        for j in range(a):
+            temp=str(mat[j][i])
+            if temp!=' ':
+                t+=temp
+        t+=' '
+            
+                
+    return t
+s = input()
+
+result = encryption(s)
+print(result)
+
