@@ -1,0 +1,45 @@
+import math
+def check(i):
+    if i==10 or i==100 or i==1000 or i==10000 or i==100000:
+        return False
+    i=str(i)
+    d = len(i)
+    i= int(i)
+    p=0
+    q=0
+    temp = i**2
+    temp=str(temp)
+    l=len(temp)
+    p=temp[:l-d]
+    q=temp[l-d:]
+    q = int(q)
+    
+    try:
+        p = int(p)
+    except:
+        p= 0
+    if p+q==i:
+        return True
+    return False
+
+
+def kaprekarNumbers(p, q):
+    pre =[]
+    if p<=0:
+        p=1
+
+    for i in range(p,q+1):
+        if check(i):
+            pre.append(i)
+    if pre==[]:
+        print("INVALID RANGE")
+    else:
+        for i in pre:
+            print(i,end =" ")
+
+
+p = int(input())
+
+q = int(input())
+
+kaprekarNumbers(p, q)
