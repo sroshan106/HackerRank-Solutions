@@ -1,0 +1,33 @@
+
+def absolutePermutation(n, k):
+    if k>n or k<0 or k>n//2 :
+        return [-1]
+    d=[]
+    
+    for i in range(1,n+1):
+        if k==0:
+            d.append(i)
+        elif i%(k*2)<=k and i%(k*2)!=0:
+            if i+k >n:
+                return [-1]
+            d.append(i+k)
+        else:
+            if i-k >n:
+                return [-1]
+            d.append(i-k)
+    return d
+
+t = int(input())
+
+for t_itr in range(t):
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    result = absolutePermutation(n, k)
+    
+    for i in result:
+        print(i,end =" ")
+    print()
