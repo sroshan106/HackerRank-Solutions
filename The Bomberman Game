@@ -1,0 +1,100 @@
+def increment(grid):
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j]=='O':
+                grid[i][j]='1'
+            elif grid[i][j]=='1':
+                grid[i][j]='2'
+    return grid
+
+def detonate(grid):
+    n = len(grid)
+    k = len(grid[0])
+    for i in range(n):
+        for j in range(k):
+            if grid[i][j]=='2':
+                grid[i][j]='.'
+                if i>0 and grid[i-1][j]!='2' :
+                    grid[i-1][j]='.'
+                if j>0 and grid[i][j-1]!='2':
+                    grid[i][j-1]='.'
+                if i<n-1 and grid[i+1][j]!='2':
+                    grid[i+1][j]='.'
+                if j<k-1 and grid[i][j+1]!='2':
+                    grid[i][j+1]='.'
+    return grid
+
+def plant(grid):
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j]=='.':
+                grid[i][j]='O'
+    return grid
+
+def bomberMan(n, grid):
+    i=1
+    if n==1:
+        p=[]
+        for i in range(len(grid)):
+            str1=''
+            for k in grid[i]:
+                str1+=k
+            str1=str1.replace('1','O')
+            str1=str1.replace('2','O')
+            p.append(str1)
+        return p  
+    elif n%2==0:
+        n=2
+    else:
+        if  n>5:
+            if n%4==3:
+                n=3
+            if n%4==1:
+                n=5
+            
+        
+    grid = detonate(grid)
+    grid = increment(grid)
+    while(i<n):
+        '''print(i,"#")
+        for t in grid:
+            print(t)
+        '''
+        if i%2==1:
+            grid = increment(grid)
+            grid = plant(grid)
+        if i%2==0:
+            grid = increment(grid)
+            grid = detonate(grid)
+
+        i+=1
+    p=[]
+    for i in range(len(grid)):
+        str1=''
+        for k in grid[i]:
+            str1+=k
+        str1=str1.replace('1','O')
+        str1=str1.replace('2','O')
+        p.append(str1)
+    return p 
+
+    
+
+rcn = input().split()
+
+r = int(rcn[0])
+
+c = int(rcn[1])
+
+n = int(rcn[2])
+
+grid = []
+
+for _ in range(r):
+    grid_item = input()
+    grid.append(list(grid_item))
+
+result = bomberMan(n, grid)
+
+for i in result:
+    print(i)
