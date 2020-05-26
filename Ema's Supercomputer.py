@@ -1,0 +1,77 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the twoPluses function below.
+def twoPluses(grid):
+    n= len(grid)
+    m= len(grid[0])
+    l=[]
+    d=[]
+    for i in range(n):
+        for j in range(m):
+            d=[]
+            if grid[i][j]=='G':
+                d.append([i,j])
+                temp=1
+                flag=0
+                if (i>0 and i<n-1) and (j>0 and j<m-1):
+                    top=i-1
+                    down=i+1
+                    left=j-1
+                    right=j+1
+                    
+                    while(top>=0 and down<=n-1 and left>=0 and right<=m-1 and flag==0):
+                        if grid[top][j]=='G' and grid[down][j]=='G' and grid[i][left]=='G' and grid[i][right]=='G':
+                            temp+=1
+                            d.append([top,j])
+                            d.append([down,j])
+                            d.append([i,left])
+                            d.append([i,right])
+
+                        else:
+                            flag=1
+                        top-=1
+                        down+=1
+                        left-=1
+                        right+=1
+                    
+                
+                l.append(d)
+    l = sorted(l, key=len)
+    l=l[::-1]
+    maxx=0
+    for i in l:
+        for k in l:
+            flag=0
+            summ=0
+            for p in k:
+                if p in i:
+                    flag=1
+            if flag==0:
+                summ = len(i)*len(k)
+            if maxx<summ:
+                maxx=summ
+    return maxx
+
+
+nm = input().split()
+
+n = int(nm[0])
+
+m = int(nm[1])
+
+grid = []
+
+for _ in range(n):
+    grid_item = input()
+    grid.append(list(grid_item))
+
+result = twoPluses(grid)
+
+print(result)
+
