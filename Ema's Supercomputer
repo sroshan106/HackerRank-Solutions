@@ -12,11 +12,12 @@ def twoPluses(grid):
     m= len(grid[0])
     l=[]
     d=[]
+    e=[]
     for i in range(n):
         for j in range(m):
-            d=[]
             if grid[i][j]=='G':
-                d.append([i,j])
+                e=[]
+                e.append([i,j])
                 temp=1
                 flag=0
                 if (i>0 and i<n-1) and (j>0 and j<m-1):
@@ -26,24 +27,26 @@ def twoPluses(grid):
                     right=j+1
                     
                     while(top>=0 and down<=n-1 and left>=0 and right<=m-1 and flag==0):
+                        d=[]
                         if grid[top][j]=='G' and grid[down][j]=='G' and grid[i][left]=='G' and grid[i][right]=='G':
                             temp+=1
                             d.append([top,j])
                             d.append([down,j])
                             d.append([i,left])
                             d.append([i,right])
-
+                            e=e+d
                         else:
                             flag=1
                         top-=1
                         down+=1
                         left-=1
                         right+=1
-                    
+                        l.append(e)
                 
-                l.append(d)
+                
     l = sorted(l, key=len)
     l=l[::-1]
+    #return l
     maxx=0
     for i in l:
         for k in l:
@@ -75,3 +78,5 @@ result = twoPluses(grid)
 
 print(result)
 
+#for i in result:
+#    print(i)
