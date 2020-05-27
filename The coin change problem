@@ -11,3 +11,25 @@ def getWays(n, c , currentCoin):
         results+=getWays(n-c[i],c,i)
     return results
 '''
+#Method by implementing dynamic array
+def getWays(n, c , currentCoin):
+    l=[0]*(n+1)
+    l[0]=1
+
+    for coin in c:
+        for i in range(1,n+1):
+            if i>=coin:
+                l[i]+=l[i-coin]
+    return l[n]
+
+
+first_multiple_input = input().rstrip().split()
+
+n = int(first_multiple_input[0])
+
+m = int(first_multiple_input[1])
+
+c = list(map(int, input().rstrip().split()))
+ways = getWays(n, c,0)
+
+print(ways)
