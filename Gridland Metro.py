@@ -15,17 +15,18 @@ def gridlandMetro(n, m, k, track):
     counter = 0
     for i in range(k):
         r,c1,c2 = track[i]
-        for p in range(c1-1,c2):
-            arr[p]=1
-
         if prev!=r:
             visited[r-1]=1    
             counter+= arr.count(0)
             arr=[0]*m
-            
+        for p in range(c1-1,c2):
+            arr[p]=1
+ 
         prev=r
-    print(counter)
+    visited[r-1]=1   
+    counter+= arr.count(0)
     temp = visited.count(0)
+
     counter+=temp*m
     return counter
 
