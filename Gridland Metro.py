@@ -1,32 +1,26 @@
-#!/bin/python3
 
-import math
-import os
-import random
-import re
-import sys
-
-# Complete the gridlandMetro function below.
 def gridlandMetro(n, m, k, track):
-    track.sort()
+    if k==0:
+        return m*n
     visited=[0]*n
     arr = [0]*m
-    prev = track[0][0]
     counter = 0
+    prev = track[0][0]
     for i in range(k):
         r,c1,c2 = track[i]
         if prev!=r:
-            visited[r-1]=1    
+            visited[prev-1]=1    
             counter+= arr.count(0)
             arr=[0]*m
         for p in range(c1-1,c2):
             arr[p]=1
- 
         prev=r
+
+
     visited[r-1]=1   
     counter+= arr.count(0)
     temp = visited.count(0)
-
+    
     counter+=temp*m
     return counter
 
