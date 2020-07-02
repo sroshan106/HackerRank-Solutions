@@ -1,0 +1,43 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+def equal(arr):
+    d=[5,2,1]
+    n=len(arr)
+    counter=1
+    minn=arr[n-1]
+    maxx=-1
+    while maxx!=minn :
+        indexMax=-1
+        indexMin=-1
+        minn=arr[n-1]
+        maxx=-1
+        for i in range(n):
+            if arr[i]>maxx:
+                maxx=arr[i]
+                indexMax=i
+            if arr[i]<minn:
+                minn=arr[i]
+                indexMin=i
+        if maxx-minn>=5:
+            arr[indexMax]-=5
+        elif maxx-minn>=2:
+            arr[indexMax]-=2
+        elif maxx-minn>=1:
+            arr[indexMax]-=1
+        counter+=1
+    return counter-2
+t = int(input())
+
+for t_itr in range(t):
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = equal(arr)
+    print(result)
