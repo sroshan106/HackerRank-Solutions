@@ -21,9 +21,9 @@ def countLuck(matrix,n,m,k):
     moves= [[1,0],[0,1],[-1,0],[0,-1]]
     queue=[]
     counter =0
-    queue.append([x,y])
+    queue.append([x,y,counter])
     while queue:
-        x,y = queue.pop(0)
+        x,y,counter = queue.pop(0)
         temp=[]
              
         if matrix[x][y]=='*':
@@ -38,10 +38,12 @@ def countLuck(matrix,n,m,k):
                 
                 if (matrix[hor][ver]=='.' or matrix[hor][ver]=='*') and visited[hor][ver]==0:
                     visited[hor][ver]=1
-                    temp.append([hor,ver])
-               
-        if len(temp)>1:
-            counter+=1
+                    temp.append([hor,ver,counter])
+        q = len(temp)
+        if q>1:
+            for i in range(q):
+                temp[i][2]+=1
+        
         queue+=temp
 
 
