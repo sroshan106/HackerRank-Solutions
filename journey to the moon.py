@@ -25,12 +25,11 @@ def journeyToMoon(n, ast):
             p = pairs(ast,i,visited)
             temp.append(p)
     length = len(temp)
-    counter=0
-    for i in range(length):
-        for j in range(i+1,length):
-            counter+=temp[i]*temp[j]
+    counter=(n*(n-1))//2
+    for i in temp:
+        if i>1:
+            counter-=((i*(i-1))//2)
     return counter
-
 np = input().split()
 
 n = int(np[0])
