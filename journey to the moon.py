@@ -1,17 +1,13 @@
 #!/bin/python3
 
-import math
-import os
-import random
-import re
-import sys
+from collections import deque
 def pairs(ast,root,visited):
-    queue=[]
+    queue = deque([])
     queue.append(root)
     visited[root]=1
     temp=1
     while queue:
-        x = queue.pop(0)
+        x = queue.popleft()
         if x in ast:
             l = ast[x]
             for i in l:
