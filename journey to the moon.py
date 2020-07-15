@@ -7,9 +7,9 @@ import re
 import sys
 def pairs(ast,root,visited):
     queue=[]
-    temp=set()
     queue.append(root)
-    temp.add(root)
+    visited[root]=1
+    temp=1
     while queue:
         x = queue.pop(0)
         if x in ast:
@@ -18,8 +18,8 @@ def pairs(ast,root,visited):
                 if visited[i]==0:
                     queue.append(i)
                     visited[i]=1
-                    temp.add(i)
-    return len(temp)
+                    temp+=1
+    return temp
 
 def journeyToMoon(n, ast):
     visited=[0]*n
@@ -29,12 +29,12 @@ def journeyToMoon(n, ast):
             p = pairs(ast,i,visited)
             temp.append(p)
     length = len(temp)
-    
     counter=0
     for i in range(length):
         for j in range(i+1,length):
             counter+=temp[i]*temp[j]
     return counter
+
 np = input().split()
 
 n = int(np[0])
