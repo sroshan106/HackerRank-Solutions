@@ -1,55 +1,42 @@
 import sys
-sys.setrecursionlimit(5000)
+sys.setrecursionlimit(6000)
+def compare(element):
+    smallest = element[2]
+    summ = element[0]+element[1]+element[2]
+    return (smallest,summ)
 
-def third(elem):
-    small = elem[2]
-    summ = elem[0]+elem[1]+elem[2]
-    return (small,summ)
-
-
-def findParent(element ,parent):
+def root(element,parent):
     if parent[element]==element:
         return element
-    return findParent(parent[element],parent)
+    return root(parent[element],parent)
 
-
-def kruskals(n, edge):
-    edge = sorted(edge,key = third)
-    #print(edge)
-    
-    output =[0]*(n-1)
-
-    parent=[0]*n
+def krus(n,e,edges):
+    edges = sorted(edges,key=compare)
+    #print(edges)
+    summ=0
+    parent =  [0]*n
     for i in range(n):
         parent[i]=i
     counter=0
-    i=0
-    while counter!=n-1:
-        source,destination,weights = edge[i]
-        sourceParent = findParent(source,parent)
-        destinationParent =  findParent(destination,parent)
-        if  sourceParent!=destinationParent:
-            output[counter]=[source,destination,weights]
-            counter+=1
-            parent[source]=destinationParent
-        i+=1
-    summ=0
-    for i in output:
-       summ+=i[2]
+    
+    for i in range(e):
+        source,destination,weight = edges[i]
+        sourceParent = root(source,parent)
+        destinationParent = root(destination,parent)
+        if sourceParent!=destinationParent:
+            summ+=weight
+            parent[sourceParent]=destinationParent
+            
     return summ
-    
 
-g_nodes, g_edges = map(int, input().rstrip().split())
-g=[]
-for i in range(g_edges):
-    g.append([0]*3)
 
-for i in range(g_edges):
-    g[i][0], g[i][1], g[i][2] = map(int, input().rstrip().split())
-    
-    g[i][0]-=1
-    g[i][1]-=1
-    
-res = kruskals(g_nodes, g)
 
-print(res)
+n , e = map(int,input().split(" "))
+edges=[]
+for _ in range(e):
+    a,b,c = list(map(int,input().split(" ")))
+    a-=1
+    b-=1
+    edges.append([a,b,c])
+result = krus(n,e,edges)
+print(result)
