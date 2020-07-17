@@ -1,23 +1,21 @@
 def dfs(node,visited,counter):
-    counter=0
+    counter=1
     global d,result
     visited[node]=1
-    print(node)
+    #print(node)
     if node in d:
         arr = d[node]
         for i in arr:
             if visited[i]==0:
-                counter += dfs(i,visited,counter)
+                counter+= dfs(i,visited,counter)
 
     if counter!=0 and counter%2==0:
         result+=1
-        print("#",node)
+        #print("#",node)
         counter=0
-    
+    visited[node]=counter
     return counter
     
-    
-
 
 # Complete the evenForest function below.
 def evenForest(t_nodes, t_edges, d):
@@ -25,7 +23,7 @@ def evenForest(t_nodes, t_edges, d):
     visited=[0]*t_nodes
     counter=0
     a=dfs(root,visited,counter)
-    
+    #print(visited)
 
 
 t_nodes, t_edges = map(int, input().rstrip().split())
@@ -49,4 +47,4 @@ for i in range(t_edges):
 
 res = evenForest(t_nodes, t_edges, d)
 
-print(result)
+print(result-1)
